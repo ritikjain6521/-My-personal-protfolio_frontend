@@ -1,37 +1,38 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Code, Coffee, Heart, Zap } from "lucide-react";
+import { Code, Coffee, Heart, Zap, Star, Activity, Briefcase, Award } from "lucide-react";
+import { useCMS } from "@/contexts/CMSContext";
+
+// Icon mapping helper
+const getIconForStat = (index: number) => {
+  const icons = [Code, Coffee, Heart, Zap, Star, Activity, Briefcase, Award];
+  return icons[index % icons.length];
+};
+
+// Color mapping helper
+const getColorForStat = (index: number) => {
+  const colors = [
+    "from-cyan-400 to-cyan-600",
+    "from-amber-400 to-amber-600",
+    "from-pink-400 to-pink-600",
+    "from-purple-400 to-purple-600",
+    "from-green-400 to-green-600",
+    "from-blue-400 to-blue-600",
+  ];
+  return colors[index % colors.length];
+};
 
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { data } = useCMS();
 
-  const stats = [
-    {
-      icon: Code,
-      label: "Projects Completed",
-      value: "5+",
-      color: "from-cyan-400 to-cyan-600",
-    },
-    {
-      icon: Coffee,
-      label: "Cups of Coffee",
-      value: "1000+",
-      color: "from-amber-400 to-amber-600",
-    },
-    {
-      icon: Heart,
-      label: "Happy Clients",
-      value: "10+",
-      color: "from-pink-400 to-pink-600",
-    },
-    {
-      icon: Zap,
-      label: "Years Experience",
-      value: "1+",
-      color: "from-purple-400 to-purple-600",
-    },
-  ];
+  const stats = data.about.stats.map((stat, index) => ({
+    icon: getIconForStat(index),
+    label: stat.label,
+    value: stat.value,
+    color: getColorForStat(index),
+  }));
 
   return (
     <section
@@ -237,20 +238,13 @@ const About = () => {
               className="space-y-4"
             >
               <h3 className="text-2xl font-bold text-accent mb-4">
-                Full Stack Developer & Problem Solver
+                {data.about.title}
               </h3>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                I'm a full-stack developer with 1+ years of experience building
-                end-to-end web applications through freelance projects,
-                internships, and hands-on work. I specialize in creating
-                responsive front-ends, scalable back-ends, and clean,
-                maintainable code and completed my internship as a web devloper in Elvate Labs.
+                {data.about.description1}
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Passionate about solving real-world problems, I enjoy exploring
-                new technologies, contributing to open source, and mentoring
-                fellow developers. Fueled by curiosity (and coffee), I embrace
-                every challenge as an opportunity to learn and grow.
+                {data.about.description2}
               </p>
             </motion.div>
 

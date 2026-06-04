@@ -1,291 +1,15 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  siJavascript,
-  siTypescript,
-  siPython,
-  siReact,
-  siNextdotjs,
-  siTailwindcss,
-  siHtml5,
-  siNodedotjs,
-  siExpress,
-  siFastapi,
-  siMongodb,
-  siPostgresql,
-  siMysql,
-  siRedis,
-  siFirebase,
-  siSupabase,
-  siDocker,
-  siGit,
-  siGithub,
-  siVercel,
-  siFigma,
-  siLinux,
-  siFramer,
-  siGithubactions,
-  siApachekafka,
-  siCss,
-  siPostman,
-  siNetlify,
-  siRender,
-  siSocketdotio,
-  siElevenlabs,
-  siShadcnui,
-  siOpenai,
-  siClerk,
-  siStripe,
-} from "simple-icons/icons";
+import { useCMS } from "@/contexts/CMSContext";
 
 const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { data } = useCMS();
+  const techSkills = data.skills;
 
-  const techSkills = [
-    // Programming Languages
-    {
-      name: "JavaScript",
-      iconPath: siJavascript.path,
-      hex: siJavascript.hex,
-      category: "Languages",
-      color: "from-yellow-400 to-yellow-600",
-    },
-    
 
-    {
-      name: "Java",
-      icon: "☕",
-      category: "Languages",
-      color: "from-red-400 to-red-600",
-    },
-  
-
-    // Frontend Technologies
-    {
-      name: "React.js",
-      iconPath: siReact.path,
-      hex: siReact.hex,
-      category: "Frontend",
-      color: "from-cyan-400 to-cyan-600",
-    },
-   
-    {
-      name: "Tailwind",
-      iconPath: siTailwindcss.path,
-      hex: siTailwindcss.hex,
-      category: "Frontend",
-      color: "from-teal-400 to-teal-600",
-    },
-    {
-      name: "HTML5",
-      iconPath: siHtml5.path,
-      hex: siHtml5.hex,
-      category: "Frontend",
-      color: "from-orange-400 to-orange-600",
-    },
-    {
-      name: "CSS",
-      iconPath: siCss.path,
-      hex: siCss.hex,
-      category: "Frontend",
-      color: "from-blue-400 to-purple-600",
-    },
-    {
-      name: "shadcn/ui",
-      iconPath: siShadcnui.path,
-      hex: siShadcnui.hex,
-      category: "Frontend",
-      color: "from-blue-400 to-red-600",
-    },
-    // Backend Technologies
-    {
-      name: "Node.js",
-      iconPath: siNodedotjs.path,
-      hex: siNodedotjs.hex,
-      category: "Backend",
-      color: "from-green-400 to-green-600",
-    },
-    {
-      name: "Express",
-      iconPath: siExpress.path,
-      hex: siExpress.hex,
-      category: "Backend",
-      color: "from-gray-400 to-gray-600",
-    },
-    {
-      name: "Fast API",
-      iconPath: siFastapi.path,
-      hex: siFastapi.hex,
-      category: "Backend",
-      color: "from-green-400 to-red-600",
-    },
-    {
-      name: "Socket.io",
-      iconPath: siSocketdotio.path,
-      hex: siSocketdotio.hex,
-      category: "Database",
-      color: "from-pink-400 to-emerald-700",
-    },
-
-    // Databases
-    {
-      name: "MongoDB",
-      iconPath: siMongodb.path,
-      hex: siMongodb.hex,
-      category: "Database",
-      color: "from-green-400 to-green-700",
-    },
-    {
-      name: "PostgreSQL",
-      iconPath: siPostgresql.path,
-      hex: siPostgresql.hex,
-      category: "Database",
-      color: "from-blue-400 to-blue-700",
-    },
-    {
-      name: "MySQL",
-      iconPath: siMysql.path,
-      hex: siMysql.hex,
-      category: "Database",
-      color: "from-blue-200 to-blue-500",
-    },
-    {
-      name: "Redis",
-      iconPath: siRedis.path,
-      hex: siRedis.hex,
-      category: "Database",
-      color: "from-pink-400 to-emerald-700",
-    },
-  
-   
-
-    // Cloud & DevOps
-
-    {
-      name: "Docker",
-      iconPath: siDocker.path,
-      hex: siDocker.hex,
-      category: "DevOps",
-      color: "from-blue-400 to-blue-600",
-    },
-    {
-      name: "Kafka",
-      iconPath: siApachekafka.path,
-      hex: siApachekafka.hex,
-      category: "DevOps",
-      color: "from-purple-700 to-green-600",
-    },
-    {
-      name: "Git",
-      iconPath: siGit.path,
-      hex: siGit.hex,
-      category: "DevOps",
-      color: "from-red-400 to-red-600",
-    },
-    {
-      name: "GitHub",
-      iconPath: siGithub.path,
-      hex: siGithub.hex,
-      category: "DevOps",
-      color: "from-slate-200 to-slate-400",
-    },
-    {
-      name: "GitHub Actions",
-      iconPath: siGithubactions.path,
-      hex: siGithubactions.hex,
-      category: "DevOps",
-      color: "from-blue-400 to-red-600",
-    },
-    {
-      name: "Vercel",
-      iconPath: siVercel.path,
-      hex: siVercel.hex,
-      category: "DevOps",
-      color: "from-gray-400 to-gray-600",
-    },
-    {
-      name: "Netlify",
-      iconPath: siNetlify.path,
-      hex: siNetlify.hex,
-      category: "DevOps",
-      color: "from-blue-400 to-blue-600",
-    },
-    {
-      name: "Render",
-      iconPath: siRender.path,
-      hex: siRender.hex,
-      category: "DevOps",
-      color: "from-red-400 to-red-600",
-    },
-
-    // Authentication
-    
-    {
-      name: "Clerk",
-      iconPath: siClerk.path,
-      hex: siClerk.hex,
-      category: "Authentication",
-      color: "from-violet-500 to-indigo-700",
-    },
-    {
-      name: "NextAuth",
-      category: "Authentication",
-      color: "from-indigo-400 to-cyan-500"
-    },
-
-    // Tools
-    {
-      name: "Figma",
-      iconPath: siFigma.path,
-      hex: siFigma.hex,
-      category: "Design",
-      color: "from-purple-400 to-purple-600",
-    },
-    {
-      name: "Framer Motion",
-      iconPath: siFramer.path,
-      hex: siFramer.hex,
-      category: "Design",
-      color: "from-purple-400 to-purple-600",
-    },
-    {
-      name: "Linux",
-      iconPath: siLinux.path,
-      hex: siLinux.hex,
-      category: "Tools",
-      color: "from-yellow-400 to-yellow-600",
-    },
-    {
-      name: "Postman",
-      iconPath: siPostman.path,
-      hex: siPostman.hex,
-      category: "Tools",
-      color: "from-blue-400 to-blue-600",
-    },
-    {
-      name: "ElevenLabs",
-      iconPath: siElevenlabs.path,
-      hex: siElevenlabs.hex,
-      category: "Tools",
-      color: "from-emerald-400 to-emerald-700",
-    },
-    {
-      name: "OpenAI",
-      iconPath: siOpenai.path,
-      hex: siOpenai.hex,
-      category: "Tools",
-      color: "from-purple-400 to-purple-600",
-    },
-    {
-      name: "Stripe",
-      iconPath: siStripe.path,
-      hex: siStripe.hex,
-      category: "Tools",
-      color: "from-green-400 to-green-600",
-    },
-  ];
 
   // Get unique categories and add "All" option
   const categories = [
@@ -430,7 +154,7 @@ const Skills = () => {
         >
           {filteredSkills.map((skill, index) => (
             <motion.div
-              key={skill.name}
+              key={skill.id || skill.name}
               initial={{
                 opacity: 0,
                 y: 50,
@@ -494,23 +218,18 @@ const Skills = () => {
                 {/* Content */}
                 <div className="relative z-10 h-full flex flex-col items-center justify-center p-3 text-center">
                   <motion.div
-                    className="text-2xl mb-2"
+                    className="text-3xl mb-2 font-bold text-white flex items-center justify-center w-12 h-12"
                     whileHover={{
                       scale: 1.2,
                       rotate: 360,
                     }}
                     transition={{ duration: 0.5 }}
                   >
-                    <svg
-                      role="img"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="28"
-                      height="28"
-                      fill={`#${skill.hex}`}
-                    >
-                      <path d={skill.iconPath} />
-                    </svg>
+                    {skill.icon ? (
+                      <span>{skill.icon}</span>
+                    ) : (
+                      <span className="opacity-80">{skill.name.charAt(0)}</span>
+                    )}
                   </motion.div>
                   <motion.h3
                     className="text-xs font-semibold text-foreground/90 group-hover:text-accent transition-colors duration-300"

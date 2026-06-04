@@ -2,47 +2,13 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Calendar, Clock, ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCMS } from "@/contexts/CMSContext";
 
 const Blogs = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const blogPosts = [
-    {
-      id: 1,
-      title: "From React.js to Next.js: Elevate Your Web Development Game",
-      excerpt:
-        "Discover how transitioning from React.js to Next.js can supercharge your web development workflow with features like server-side rendering, API routes, and built-in performance optimization.",
-      date: "2024-06-04",
-      readTime: "6 min read",
-      tags: ["React", "Next.js", "Web Development", "Full Stack Development"],
-      url: "#",
-      image: "/blog1.png",
-    },
-
-    {
-      id: 2,
-      title: "How to start with React.js: A Simple Guide for Beginners",
-      excerpt:
-        "A beginner-friendly guide to help you get started with React.js. Learn the core concepts, project setup, and how to build your first interactive UI components step by step.",
-      date: "2024-06-07",
-      readTime: "5 min read",
-      tags: ["React", "Web Development", "Javascript"],
-      url: "#",
-      image: "/blog2.png",
-    },
-    {
-      id: 3,
-      title: "Discover HTMX: Revolutionizing Modern Web Development",
-      excerpt:
-        "Explore how HTMX is transforming modern web development by enabling dynamic, interactive user experiences using standard HTML—without relying heavily on JavaScript frameworks.",
-      date: "2024-06-22",
-      readTime: "6 min read",
-      tags: ["HTMX", "HTML5", "Frontend", "Web Development"],
-      url: "#",
-      image: "/blog3.png",
-    },
-  ];
+  const { data } = useCMS();
+  const blogPosts = data.blogPosts;
 
   const containerVariants = {
     hidden: { opacity: 0 },

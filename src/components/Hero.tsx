@@ -1,6 +1,7 @@
-import { ArrowDown, Github, Linkedin, Mail, Terminal } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Terminal, FileText } from "lucide-react";
 import { color, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useCMS } from "@/contexts/CMSContext";
 // Using the uploaded image directly
 const developerPhoto =
   "/lovable-uploads/527e4f40-1c8f-4c3f-b934-cf5361a2627d.png";
@@ -9,6 +10,11 @@ import CodeSnippets from "./CodeSnippets";
 import { SiHashnode } from "react-icons/si";
 
 const Hero = () => {
+  const { data } = useCMS();
+  const nameParts = data.hero.name.split(" ");
+  const firstName = nameParts[0] || "";
+  const lastName = nameParts.slice(1).join(" ") || "";
+
   return (
     <section
       id="home"
@@ -59,16 +65,6 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="space-y-2">
-              {/* <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="flex items-center gap-2 text-accent sm:text-lg md:text-[0.8rem] lg:text-[1rem] font-medium"
-              >
-                <Terminal className="h-5 w-5" />
-                <span>console.log("Hello World!");</span>
-              </motion.div> */}
-
               <motion.h1
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold leading-tight"
                 initial={{ opacity: 0, y: 20 }}
@@ -77,7 +73,6 @@ const Hero = () => {
               >
                 <motion.span
                   className="gradient-text inline-block"
-                  // animate={{ rotateY: [0, 360] }}
                   transition={{
                     duration: 2,
                     delay: 1,
@@ -85,9 +80,9 @@ const Hero = () => {
                     repeatDelay: 5,
                   }}
                 >
-                  Ritik 
+                  {firstName}
                 </motion.span>{" "}
-                <span>Jain </span>
+                <span>{lastName}</span>
               </motion.h1>
 
               <motion.div
@@ -97,16 +92,7 @@ const Hero = () => {
                 className="relative"
               >
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground">
-                  Full Stack Developer  &
-                  <motion.span
-                    className="text-accent ml-2"
-                    animate={{
-                      color: ["#00ffff", "#8b5cf6", "#ff00ff", "#00ffff"],
-                    }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                  >
-                    Freelancer
-                  </motion.span>
+                  {data.hero.tagline}
                 </h2>
               </motion.div>
             </div>
@@ -117,9 +103,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              Turning coffee into code and ideas into reality. I build
-              full-stack solutions with modern web tech, a love for learning,
-              and a passion for digital innovation.
+              {data.hero.bio}
             </motion.p>
 
             <motion.div
@@ -171,22 +155,26 @@ const Hero = () => {
               transition={{ delay: 1.2 }}
             >
               {[
-                {
+                ...(data.hero.githubUrl ? [{
                   icon: Github,
-                  href: "https://github.com/ritikjain6521",
+                  href: data.hero.githubUrl,
                   color: "hover:text-neon-purple",
-                },
-                {
+                }] : []),
+                ...(data.hero.linkedinUrl ? [{
                   icon: Linkedin,
-                  href: "www.linkedin.com/in/ritik-jain-77a090267/",
+                  href: data.hero.linkedinUrl,
                   color: "hover:text-neon-cyan",
-                },
+                }] : []),
                 {
                   icon: Mail,
-                  href: "ritikjain6224@gmail.com ",
+                  href: "mailto:ritikjain6224@gmail.com",
                   color: "hover:text-neon-pink",
                 },
-              
+                ...(data.hero.resumeUrl ? [{
+                  icon: FileText,
+                  href: data.hero.resumeUrl,
+                  color: "hover:text-neon-purple",
+                }] : []),
               ].map((social, index) => (
                 <motion.a
                   key={index}

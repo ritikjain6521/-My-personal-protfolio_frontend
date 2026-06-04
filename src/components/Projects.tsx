@@ -10,6 +10,7 @@ import { ExternalLink, Github } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useCMS } from "@/contexts/CMSContext";
 
 const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -278,74 +279,8 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const projects = [
-    {
-      title: "ABH SHOP - Full Stack E-commerce Website ",
-      description:
-        "ABH SHOP is a fully responsive and feature-rich e-commerce web application where users can browse products by category and price range, view detailed product listings, and add items to their cart. The platform includes:🔍 Search bar for easy product lookup 🧾 User Authentication (Profile, Logout, Admin access📦 Product Categories like Mobile, Laptop, Noise Buds, etc.💰 Dynamic Price Filters for quick product sorting🛍️ Add to Cart functionality with live product cards📱 Optimized for all device sizes (mobile-first design)   ",
-      
-    
-        tech: [
-        "React.js",
-        "TypeScript",
-        "Bootstrap CSS",
-        "MongoDB",
-        " Express.js",
-        
-      ],
-      image:
-        "/project1.png",
-      liveUrl: "https://ritikjain6521-find-a-repository-eco-omega.vercel.app/",
-      githubUrl: "https://github.com/ritikjain6521/e-commerce",
-    },
-    {
-      title: " PassOP - Our Own Password Manager",
-      description:
-        "PassOP is a sleek and simple web-based password manager that allows users to securely save and manage their login credentials. It features:🔎 Input fields for website URL, username, and password👁️ Password visibility toggle➕ Add new credentials📝 Edit or 🗑️ delete saved entries📋 Organized password table with site, username, and password🌐 Fully responsive UI with a clean and user-friendly design",
-      tech: [
-       " HTML5: Structure",
-"CSS3	: Styling",
-"JavaScript	Frontend: Logic",
-"React	UI: Framework",
-"Node.js	Backend (optional for future)",
-"Express	(Optional backend integration)",
-"MongoDB	(Not used - replaced by local storage)",
-        
-      ],
-      image: "/project7.png",
-      liveUrl: "https://mypasswordmanager.netlify.app/",
-      githubUrl:
-        "https://github.com/RudrakshGupta0413/PingPanda_AI_SaaS_Monitoring_Platform",
-    },
-    {
-      title: "My Personal Portfolio",
-      description:
-        "A fully responsive and modern portfolio website built using the MERN Stack (MongoDB, Express.js, React.js, Node.js). Showcases personal projects, skills, resume, and includes a contact form with backend integration.",
-      tech: [
-        "React.js",
-        "HTML5",
-        "Tailwind CSS",
-        "JavaScript",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-      ],
-      image: "/project8.png",
-      liveUrl: "https://portfoliowebproject.vercel.app/",
-      githubUrl: "https://github.com/ritikjain6521/Portfoliowebproject",
-    },
-    {
-      title: "Full Stack Music App",
-      description:
-        "A full-featured, responsive Music Streaming Website built using the MERN stack with PostgreSQL for robust relational data management. Users can browse, play, search music, and manage playlists in a sleek and dynamic interface.",
-      tech: ["React.js", "Javascript", "postgresql", "Bootstrap CSS","nodejs","express js"],
-      image: "/project9.png",
-      liveUrl: "https://siddha-sangeet.onrender.com",
-      githubUrl:
-        "https://github.com/ritikjain6521/myfirstproject",
-    },
-   
-  ];
+  const { data } = useCMS();
+  const projects = data.projects;
 
   return (
     <section
