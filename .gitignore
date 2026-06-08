@@ -40,5 +40,5 @@ backend/uploads/*
 !backend/uploads/.gitkeep
 
 # Old root src (kept for reference — don't commit)
-src/
-public/
+/src/
+/public/
