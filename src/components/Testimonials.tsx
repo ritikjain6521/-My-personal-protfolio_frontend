@@ -15,7 +15,22 @@ const Testimonials = () => {
       rating: 5,
       avatar: "/Testimonial1.png",
     },
-
+    {
+      name: "Sarah Jenkins",
+      role: "Product Manager",
+      content:
+        "Working with Ritik was an absolute pleasure. He successfully automated our lead generation process using N8N and custom Python scrapers. It saved us countless hours of manual work and significantly boosted our sales pipeline.",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    },
+    {
+      name: "David Chen",
+      role: "Founder, TechStart",
+      content:
+        "Ritik built our e-commerce platform from the ground up using the MERN stack. His attention to detail, modern design approach, and robust backend implementation exceeded all our expectations. Highly recommended!",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    },
   ];
 
   return (

@@ -2,9 +2,8 @@ import { ArrowDown, Github, Linkedin, Mail, Terminal, FileText } from "lucide-re
 import { color, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useCMS } from "@/contexts/CMSContext";
-// Using the uploaded image directly
-const developerPhoto =
-  "/lovable-uploads/527e4f40-1c8f-4c3f-b934-cf5361a2627d.png";
+// Fallback image
+const defaultDeveloperPhoto = "/lovable-uploads/527e4f40-1c8f-4c3f-b934-cf5361a2627d.png";
 import ParticleBackground from "./ParticleBackground";
 import CodeSnippets from "./CodeSnippets";
 import { SiHashnode } from "react-icons/si";
@@ -14,6 +13,7 @@ const Hero = () => {
   const nameParts = data.hero.name.split(" ");
   const firstName = nameParts[0] || "";
   const lastName = nameParts.slice(1).join(" ") || "";
+  const developerPhoto = data.hero.image || defaultDeveloperPhoto;
 
   return (
     <section

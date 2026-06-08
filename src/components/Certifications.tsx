@@ -40,7 +40,11 @@ const Certifications = () => {
             >
               <Card className="p-6 h-full glass-effect group hover:-translate-y-2 transition-transform duration-300">
                 <div className="flex flex-col h-full">
-                  <div className="text-4xl mb-4">{cert.badge || "🏆"}</div>
+                  {cert.image ? (
+                    <img src={cert.image} alt={cert.title} className="w-full h-40 object-cover rounded-xl mb-4 border border-white/10" />
+                  ) : (
+                    <div className="text-4xl mb-4">{cert.badge || "🏆"}</div>
+                  )}
                   <h3 className="text-xl font-semibold mb-2 group-hover:text-amber-400 transition-colors">
                     {cert.title}
                   </h3>

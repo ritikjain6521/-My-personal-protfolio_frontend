@@ -1,56 +1,56 @@
-# 💼 MERN Stack Portfolio Website
+# Ritik Jain — Personal Portfolio
 
-A fully responsive and modern **portfolio website** built using the **MERN Stack** (MongoDB, Express.js, React.js, Node.js). Showcases personal projects, skills, resume, and includes a contact form with backend integration.
+A full-stack personal portfolio website built with React + Vite (frontend) and Node.js + Express + MongoDB (backend).
 
----
+## Project Structure
+```
+My_Personal_Portfolio-main/
+├── frontend/         ← React/Vite app (deploy to Vercel)
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── vercel.json
+└── backend/          ← Node.js/Express API (deploy to Render)
+    ├── models/
+    ├── routes/
+    ├── server.js
+    └── package.json
+```
 
-## 🛠️ Tech Stack
+## Local Development
 
-### Frontend & UI
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+### 1. Start the Backend
+```bash
+cd backend
+npm install
+npm start        # runs on http://localhost:5000
+```
 
-### Backend & Server
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+### 2. Start the Frontend
+```bash
+cd frontend
+npm install
+npm run dev      # runs on http://localhost:8080
+```
 
-### Tools & Deployment
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-![Render](https://img.shields.io/badge/Render-00979D?style=for-the-badge&logo=render&logoColor=white)
+## Deployment
 
----
+| Service | Provider | Root Dir |
+|---|---|---|
+| Frontend | [Vercel](https://vercel.com) | `frontend` |
+| Backend | [Render](https://render.com) | `backend` |
 
-## 🚀 Features
+### Environment Variables
 
-- ⚡ Fully responsive and mobile-friendly
-- 💻 Built with the MERN stack
-- 📄 Dynamic project section
-- 📬 Contact form with backend email handling
-- 🧾 Resume download option
-- 🌐 Live deployment (Vercel/Render)
+**Frontend (Vercel):**
+```
+VITE_API_BASE_URL=https://your-backend.onrender.com
+```
 
----
-
-## 📁 Project Structure
-├── client/ # React frontend
-│ └── src/
-│ ├── components/
-│ ├── pages/
-│ └── App.js
-├── server/ # Express backend
-│ ├── routes/
-│ └── server.js
-├── .env
-├── package.json
-└── README.md
-
-yaml
-Copy
-Edit
-
+**Backend (Render):**
+```
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secure_jwt_secret
+FRONTEND_URL=https://your-portfolio.vercel.app
+PORT=5000
+```

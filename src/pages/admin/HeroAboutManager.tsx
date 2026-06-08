@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useCMS } from "@/contexts/CMSContext";
 import AdminLayout from "@/components/admin/AdminLayout";
+import FileUpload from "@/components/admin/FileUpload";
 import { User, Check, Save, RefreshCw, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -92,6 +93,15 @@ const HeroAboutManager = () => {
               <label className={labelCls}>Tagline / Role</label>
               <input value={hero.tagline} onChange={(e) => setHeroField("tagline", e.target.value)}
                 placeholder="Full Stack Developer & Problem Solver" className={inputCls} />
+            </div>
+            <div className="sm:col-span-2">
+              <FileUpload
+                label="Hero Profile Image"
+                value={hero.image || ''}
+                onChange={(url) => setHeroField("image", url)}
+                accept="image/*"
+                type="image"
+              />
             </div>
             <div className="sm:col-span-2">
               <label className={labelCls}>Bio / Short Description</label>

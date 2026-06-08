@@ -119,4 +119,18 @@ router.put('/blogs', authMiddleware, async (req, res) => {
   }
 });
 
+// Update Experience
+router.put('/experience', authMiddleware, async (req, res) => {
+  try {
+    const data = await CMSData.findOneAndUpdate(
+      { singleton_id: 'portfolio_cms_data' },
+      { $set: { experience: req.body } },
+      { new: true, upsert: true }
+    );
+    res.json(data.experience);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 export default router;

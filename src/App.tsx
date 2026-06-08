@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import BlogPost from "./pages/BlogPost";
 import { Analytics } from "@vercel/analytics/react";
 
 // CMS & Auth Providers
@@ -20,6 +21,8 @@ import ProjectsManager from "./pages/admin/ProjectsManager";
 import CertificationsManager from "./pages/admin/CertificationsManager";
 import BlogManager from "./pages/admin/BlogManager";
 import HeroAboutManager from "./pages/admin/HeroAboutManager";
+import ExperienceManager from "./pages/admin/ExperienceManager";
+import ResumeMaker from "./pages/admin/ResumeMaker";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -35,6 +38,7 @@ const App = () => (
             <Routes>
               {/* Public Portfolio */}
               <Route path="/" element={<Index />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
 
               {/* Admin Auth */}
               <Route path="/admin/login" element={<AdminLogin />} />
@@ -48,6 +52,8 @@ const App = () => (
               <Route path="/admin/certifications" element={<ProtectedRoute><CertificationsManager /></ProtectedRoute>} />
               <Route path="/admin/blogs" element={<ProtectedRoute><BlogManager /></ProtectedRoute>} />
               <Route path="/admin/hero" element={<ProtectedRoute><HeroAboutManager /></ProtectedRoute>} />
+              <Route path="/admin/experience" element={<ProtectedRoute><ExperienceManager /></ProtectedRoute>} />
+              <Route path="/admin/resume" element={<ProtectedRoute><ResumeMaker /></ProtectedRoute>} />
 
               {/* Catch-all */}
               <Route path="*" element={<NotFound />} />

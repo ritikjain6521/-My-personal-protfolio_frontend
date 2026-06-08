@@ -19,9 +19,9 @@ const FloatingNav = () => {
   const navItems = [
     { id: "home", icon: Home, label: "Home" },
     { id: "skills", icon: Code, label: "Skills" },
+    { id: "experience", icon: Briefcase, label: "Experience" },
     { id: "projects", icon: Briefcase, label: "Projects" },
     { id: "blogs", icon: PenTool, label: "Blogs" },
-    // { id: "testimonials", icon: MessageSquare, label: "Testimonials" },
     { id: "contact", icon: User, label: "Contact" },
   ];
 

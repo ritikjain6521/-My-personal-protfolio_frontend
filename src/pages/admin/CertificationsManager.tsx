@@ -2,10 +2,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCMS, Certification } from "@/contexts/CMSContext";
 import AdminLayout from "@/components/admin/AdminLayout";
+import FileUpload from "@/components/admin/FileUpload";
 import { Plus, Pencil, Trash2, X, Check, Award, Search, ExternalLink } from "lucide-react";
 
 const emptyCert = (): Omit<Certification, "id"> => ({
-  title: "", issuer: "", date: "", credentialUrl: "", badge: "🏆",
+  title: "", issuer: "", date: "", credentialUrl: "", badge: "🏆", image: "",
 });
 
 const CertForm = ({
@@ -36,6 +37,15 @@ const CertForm = ({
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/20 focus:outline-none focus:border-amber-500/50 transition-all" />
           </div>
         ))}
+        <div className="sm:col-span-2">
+          <FileUpload
+            label="Certification Image (Optional)"
+            value={form.image || ""}
+            onChange={(url) => set("image", url)}
+            accept="image/*"
+            type="image"
+          />
+        </div>
       </div>
       <div className="flex gap-3">
         <button onClick={() => { if (form.title.trim() && form.issuer.trim()) onSave(form); }}
@@ -98,11 +108,15 @@ const CertificationsManager = () => {
               <motion.div key={cert.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }} transition={{ delay: i * 0.05 }} layout>
                 {editingId === cert.id ? (
-                  <CertForm initial={{ title: cert.title, issuer: cert.issuer, date: cert.date, credentialUrl: cert.credentialUrl, badge: cert.badge }}
+                  <CertForm initial={{ title: cert.title, issuer: cert.issuer, date: cert.date, credentialUrl: cert.credentialUrl, badge: cert.badge, image: cert.image }}
                     onSave={(f) => edit(cert.id, f)} onCancel={() => setEditingId(null)} />
                 ) : (
-                  <div className="group bg-white/[0.03] border border-white/8 rounded-2xl p-5 hover:border-white/15 transition-all h-full">
-                    <div className="text-3xl mb-3">{cert.badge || "🏆"}</div>
+                  <div className="group bg-white/[0.03] border border-white/8 rounded-2xl p-5 hover:border-white/15 transition-all h-full flex flex-col">
+                    {cert.image ? (
+                      <img src={cert.image} alt={cert.title} className="w-full h-32 object-cover rounded-xl mb-3 border border-white/10" />
+                    ) : (
+                      <div className="text-3xl mb-3">{cert.badge || "🏆"}</div>
+                    )}
                     <h3 className="text-white font-semibold text-sm mb-1 leading-snug">{cert.title}</h3>
                     <p className="text-amber-400/80 text-xs font-medium mb-1">{cert.issuer}</p>
                     {cert.date && <p className="text-white/30 text-xs mb-3">{new Date(cert.date).toLocaleDateString("en-US", { year: "numeric", month: "long" })}</p>}

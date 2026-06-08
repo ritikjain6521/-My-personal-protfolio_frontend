@@ -80,7 +80,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
         transition={{ duration: 0.5 }}
       />
 
-      <Card className="relative overflow-hidden glass-effect border-border/30 h-full backdrop-blur-xl">
+      <Card className="relative overflow-hidden glass-effect border-border/30 h-full backdrop-blur-xl flex flex-col">
         <div className="relative overflow-hidden">
           {/* Main project image with parallax effect */}
           <motion.div
@@ -89,17 +89,34 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               transform: "translateZ(20px)",
             }}
           >
-            <motion.img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover"
-              style={{
-                scale: scale,
-                transform: "translateZ(10px)",
-              }}
-              whileHover={{ scale: 1.15 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            />
+            {project.video ? (
+              <motion.video
+                src={project.video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+                style={{
+                  scale: scale,
+                  transform: "translateZ(10px)",
+                }}
+                whileHover={{ scale: 1.15 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+            ) : (
+              <motion.img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover"
+                style={{
+                  scale: scale,
+                  transform: "translateZ(10px)",
+                }}
+                whileHover={{ scale: 1.15 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+            )}
 
             {/* Dynamic color overlay based on hover position */}
             <motion.div
@@ -201,7 +218,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 
         {/* Content section with enhanced animations */}
         <motion.div
-          className="p-6 relative"
+          className="p-6 relative flex-1 flex flex-col"
           style={{ transform: "translateZ(40px)" }}
         >
           {/* Floating title with magnetic effect */}
@@ -235,7 +252,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 
           {/* Enhanced tech stack with staggered reveal */}
           <motion.div
-            className="flex flex-wrap gap-2"
+            className="flex flex-wrap gap-2 mt-auto pt-4"
             initial="hidden"
             whileInView="visible"
             variants={{

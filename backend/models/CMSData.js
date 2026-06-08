@@ -10,6 +10,7 @@ const cmsDataSchema = new mongoose.Schema({
     githubUrl: { type: String, default: "https://github.com/ritikjain6521" },
     linkedinUrl: { type: String, default: "www.linkedin.com/in/ritik-jain-77a090267/" },
     resumeUrl: { type: String, default: "" },
+    image: { type: String, default: "" },
   },
 
   about: {
@@ -35,6 +36,7 @@ const cmsDataSchema = new mongoose.Schema({
     title: String,
     description: String,
     image: String,
+    video: String,
     tech: [String],
     liveUrl: String,
     githubUrl: String,
@@ -47,17 +49,47 @@ const cmsDataSchema = new mongoose.Schema({
     date: String,
     credentialUrl: String,
     badge: String,
+    image: String,
   }],
 
   blogPosts: [{
     id: String,
     title: String,
     excerpt: String,
+    content: String,
     date: String,
     readTime: String,
     tags: [String],
     url: String,
     image: String,
+  }],
+
+  experience: [{
+    id: String,
+    company: String,
+    role: String,
+    startDate: String,
+    endDate: String,
+    current: { type: Boolean, default: false },
+    location: String,
+    companyUrl: String,
+    description: String,
+    totalHours: String,
+    projectGroups: [{
+      groupId: String,
+      groupName: String,
+      groupIcon: String,
+      color: String,
+      description: String,
+      projects: [{
+        projectId: String,
+        name: String,
+        description: String,
+        tech: [String],
+        hours: String,
+        url: String,
+      }]
+    }]
   }]
 }, { timestamps: true });
 

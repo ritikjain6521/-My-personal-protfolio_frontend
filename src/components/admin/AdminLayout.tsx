@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   LayoutDashboard,
@@ -11,9 +11,13 @@ import {
   ExternalLink,
   ChevronRight,
   Shield,
+  Menu,
+  X,
+  Briefcase,
+  FileText,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navItems = [
   { to: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -22,12 +26,21 @@ const navItems = [
   { to: "/admin/certifications", icon: Award, label: "Certifications" },
   { to: "/admin/blogs", icon: BookOpen, label: "Blog Posts" },
   { to: "/admin/hero", icon: User, label: "Hero & About" },
+  { to: "/admin/experience", icon: Briefcase, label: "Experience" },
+  { to: "/admin/resume", icon: FileText, label: "Resume Maker" },
 ];
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const handleLogout = () => {
     logout();
@@ -36,12 +49,21 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex font-sans">
+      {/* Mobile Overlay */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <motion.aside
         animate={{ width: collapsed ? 72 : 260 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="relative flex flex-col bg-[#0d0d18] border-r border-white/5 overflow-hidden shrink-0 z-20"
-        style={{ minHeight: "100vh" }}
+        className={`fixed md:relative top-0 left-0 h-screen flex flex-col bg-[#0d0d18] border-r border-white/5 overflow-hidden shrink-0 z-50 transform transition-transform duration-300 ${
+          mobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
       >
         {/* Logo */}
         <div className="flex items-center gap-3 px-4 py-6 border-b border-white/5">
@@ -53,18 +75,25 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
-              className="overflow-hidden"
+              className="overflow-hidden flex-1"
             >
               <p className="text-white font-bold text-sm leading-tight">Admin Panel</p>
               <p className="text-white/40 text-xs">Portfolio CMS</p>
             </motion.div>
           )}
+          {/* Mobile close button */}
+          <button 
+            onClick={() => setMobileMenuOpen(false)}
+            className="md:hidden text-white/50 hover:text-white p-1"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
-        {/* Collapse toggle */}
+        {/* Collapse toggle (Desktop only) */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-8 w-6 h-6 rounded-full bg-[#1a1a2e] border border-white/10 flex items-center justify-center text-white/50 hover:text-white transition-colors z-30"
+          className="hidden md:flex absolute -right-3 top-8 w-6 h-6 rounded-full bg-[#1a1a2e] border border-white/10 items-center justify-center text-white/50 hover:text-white transition-colors z-30"
         >
           <ChevronRight
             className="w-3 h-3 transition-transform duration-300"
@@ -141,7 +170,19 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       </motion.aside>
 
       {/* Main content */}
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto w-full md:w-auto">
+        {/* Mobile Header */}
+        <div className="md:hidden flex items-center justify-between p-4 bg-[#0d0d18] border-b border-white/5 sticky top-0 z-30">
+          <div className="flex items-center gap-3">
+             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-violet-500/30">
+                <Shield className="w-4 h-4 text-white" />
+             </div>
+             <p className="text-white font-bold text-sm leading-tight">Admin Panel</p>
+          </div>
+          <button onClick={() => setMobileMenuOpen(true)} className="text-white/70 hover:text-white p-1">
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
         <main className="min-h-screen">{children}</main>
       </div>
     </div>

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCMS, Project } from "@/contexts/CMSContext";
 import AdminLayout from "@/components/admin/AdminLayout";
+import FileUpload from "@/components/admin/FileUpload";
 import { Plus, Pencil, Trash2, X, Check, FolderKanban, Search, ExternalLink, Github } from "lucide-react";
 
 const emptyProject = (): Omit<Project, "id"> => ({
   title: "",
   description: "",
   image: "",
+  video: "",
   tech: [],
   liveUrl: "",
   githubUrl: "",
@@ -59,12 +61,24 @@ const ProjectForm = ({
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="text-white/50 text-xs font-medium mb-1.5 block">Image URL</label>
-            <input value={form.image} onChange={(e) => set("image", e.target.value)}
-              placeholder="/project1.png or https://..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/20 focus:outline-none focus:border-violet-500/50 transition-all" />
+            <FileUpload
+              label="Project Image URL"
+              value={form.image}
+              onChange={(url) => set("image", url)}
+              accept="image/*"
+              type="image"
+            />
           </div>
           <div>
+            <FileUpload
+              label="Project Video URL (Optional)"
+              value={form.video || ""}
+              onChange={(url) => set("video", url)}
+              accept="video/*"
+              type="video"
+            />
+          </div>
+          <div className="sm:col-span-2">
             <label className="text-white/50 text-xs font-medium mb-1.5 block">Tech Stack (comma-separated)</label>
             <input value={techInput} onChange={(e) => setTechInput(e.target.value)}
               placeholder="React.js, Node.js, MongoDB"
@@ -158,7 +172,7 @@ const ProjectsManager = () => {
                 exit={{ opacity: 0, y: -10 }} transition={{ delay: index * 0.05 }} layout>
                 {editingId === project.id ? (
                   <ProjectForm
-                    initial={{ title: project.title, description: project.description, image: project.image, tech: project.tech, liveUrl: project.liveUrl, githubUrl: project.githubUrl }}
+                    initial={{ title: project.title, description: project.description, image: project.image, video: project.video, tech: project.tech, liveUrl: project.liveUrl, githubUrl: project.githubUrl }}
                     onSave={(f) => editProject(project.id, f)}
                     onCancel={() => setEditingId(null)} />
                 ) : (
