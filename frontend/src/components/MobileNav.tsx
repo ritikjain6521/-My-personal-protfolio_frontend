@@ -10,8 +10,10 @@ import {
   X,
   PenTool,
 } from "lucide-react";
+import { useCMS } from "@/contexts/CMSContext";
 
 const MobileNav = () => {
+  const { data } = useCMS();
   const [activeSection, setActiveSection] = useState("home");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -79,7 +81,7 @@ const MobileNav = () => {
             >
               <Code className="h-6 w-6 text-primary" />
             </motion.div>
-            <h3 className="text-xl font-bold gradient-text">Rudraksh Gupta</h3>
+            <h3 className="text-xl font-bold gradient-text">{data.hero.name}</h3>
           </div>
 
           {/* Menu Toggle */}
