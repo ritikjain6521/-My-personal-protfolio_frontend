@@ -79,7 +79,7 @@ const MobileNav = () => {
             >
               <Code className="h-6 w-6 text-primary" />
             </motion.div>
-            <h3 className="text-xl font-bold gradient-text">Ritik jain </h3>
+            <h3 className="text-xl font-bold gradient-text">Rudraksh Gupta</h3>
           </div>
 
           {/* Menu Toggle */}
@@ -130,11 +130,10 @@ const MobileNav = () => {
                   <motion.button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`flex flex-col items-center p-3 rounded-xl transition-all duration-300 ${
-                      activeSection === item.id
+                    className={`flex flex-col items-center p-3 rounded-xl transition-all duration-300 ${activeSection === item.id
                         ? "bg-primary text-primary-foreground glow-effect"
                         : "text-muted-foreground hover:text-accent hover:bg-secondary/20"
-                    }`}
+                      }`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
