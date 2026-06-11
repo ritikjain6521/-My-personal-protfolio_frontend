@@ -18,8 +18,11 @@ const PORT = process.env.PORT || 5000;
 
 // CORS — allow local dev + production Vercel frontend
 const allowedOrigins = [
+  'http://localhost:8080',
+  'http://localhost:5173',
+  'http://localhost:3000',
   'https://my-personal-protfolio-backend-5.onrender.com',
-  'https://my-personal-protfolio-frontend-5tx7.vercel.app/',
+  'https://my-personal-protfolio-frontend-5tx7.vercel.app',
   process.env.FRONTEND_URL, // e.g. https://your-portfolio.vercel.app
 ].filter(Boolean);
 
