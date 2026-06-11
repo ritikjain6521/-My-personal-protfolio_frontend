@@ -21,7 +21,7 @@ const allowedOrigins = [
   'http://localhost:8080',
   'http://localhost:5173',
   'http://localhost:3000',
-  'https://my-personal-protfolio-backend-5.onrender.com',
+  'https://my-personal-protfolio-backend-6.onrender.com',
   'https://my-personal-protfolio-frontend-5tx7.vercel.app',
   process.env.FRONTEND_URL, // e.g. https://your-portfolio.vercel.app
 ].filter(Boolean);

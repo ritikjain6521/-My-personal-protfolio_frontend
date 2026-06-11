@@ -1,6 +1,6 @@
 // Central API base URL — works in both local dev (via Vite proxy) and production (direct backend URL)
 // In production, set VITE_API_BASE_URL in Vercel env vars to your Render backend URL
-export const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? 'https://my-personal-protfolio-backend-5.onrender.com' : '');
+export const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? 'https://my-personal-protfolio-backend-6.onrender.com' : '');
 
 export const getImageUrl = (url: string | undefined) => {
   if (!url) return '';
