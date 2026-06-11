@@ -5,6 +5,15 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
+router.get('/check', async (req, res) => {
+  try {
+    const count = await User.countDocuments();
+    res.json({ hasAdmin: count > 0 });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 router.post('/signup', async (req, res) => {
   try {
     const { email, password } = req.body;

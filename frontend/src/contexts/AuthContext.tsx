@@ -27,6 +27,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [hasAdmin, setHasAdmin] = useState(true); // Assume true by default in prod
 
   useEffect(() => {
+    // Check if admin exists
+    fetch(`${API_BASE}/api/auth/check`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.hasAdmin !== undefined) {
+          setHasAdmin(data.hasAdmin);
+        }
+      })
+      .catch(console.error);
+
     const session = localStorage.getItem(SESSION_KEY);
     if (session) {
       try {
