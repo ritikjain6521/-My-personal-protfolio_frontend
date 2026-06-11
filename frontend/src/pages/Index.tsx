@@ -10,6 +10,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingNav from "@/components/FloatingNav";
 import MobileNav from "@/components/MobileNav";
+import AIAssistant from "@/components/AIAssistant";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
       <Testimonials />
       <Contact />
       <Footer />
+      <AIAssistant />
     </div>
   );
 };

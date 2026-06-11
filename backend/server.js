@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
 import cmsRoutes from './routes/cms.js';
 import uploadRoutes from './routes/upload.js';
+import chatRoutes from './routes/chat.js';
 
 dotenv.config();
 
@@ -44,6 +45,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/cms', cmsRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
